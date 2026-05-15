@@ -1,0 +1,26 @@
+services:
+  app:
+    build: .
+    container_name: cart-promo-app
+    ports:
+      - "8000:8000"
+    working_dir: /app
+    volumes:
+      - .:/app
+      - vendor:/app/vendor
+    command: php artisan serve --host=0.0.0.0 --port=8000
+    depends_on:
+      - mysql
+
+  mysql:
+    image: mysql:8.0
+    container_name: cart-promo-db
+    restart: always
+    environment:
+      MYSQL_DATABASE: cart_promo_service_db
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3307:3306"
+
+volumes:
+  vendor:
