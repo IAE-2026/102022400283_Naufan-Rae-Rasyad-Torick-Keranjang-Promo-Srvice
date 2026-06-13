@@ -78,4 +78,5 @@ type ApplyPromoResponse {
     promo_code: String
     discount: Float
     final_total: Float
+    receipt_number: String
 }

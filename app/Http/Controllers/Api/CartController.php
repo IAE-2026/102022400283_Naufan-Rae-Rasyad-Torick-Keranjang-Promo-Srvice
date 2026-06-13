@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\Cart;
+use App\Services\RabbitMqPublisher;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use OpenApi\Attributes as OA;
@@ -56,6 +57,14 @@ class CartController extends Controller
             'quantity',
             'price',
         ]));
+
+        // Publish cart.created event to RabbitMQ
+        try {
+            $publisher = new RabbitMqPublisher();
+            $publisher->publish('cart.created', $cart->toArray());
+        } catch (\Exception $e) {
+            \Log::error('RabbitMQ publish failed: ' . $e->getMessage());
+        }
 
         return response()->json([
             'status' => 'success',
@@ -122,6 +131,14 @@ class CartController extends Controller
         }
 
         $cart->delete();
+
+        // Publish cart.deleted event to RabbitMQ
+        try {
+            $publisher = new RabbitMqPublisher();
+            $publisher->publish('cart.deleted', ['cart_id' => $id]);
+        } catch (\Exception $e) {
+            \Log::error('RabbitMQ publish failed: ' . $e->getMessage());
+        }
 
         return response()->json([
             'status' => 'success',
