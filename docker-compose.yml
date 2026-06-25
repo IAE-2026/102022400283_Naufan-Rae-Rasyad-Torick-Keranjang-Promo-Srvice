@@ -4,7 +4,6 @@ services:
   # Service internal TIDAK bisa diakses langsung dari luar
   nginx:
     image: nginx:alpine
-    container_name: cart-promo-gateway
     restart: always
     ports:
       - "80:80"
@@ -17,7 +16,6 @@ services:
   # Hanya bisa diakses via nginx (tidak ada port mapping ke host)
   app:
     build: .
-    container_name: cart-promo-app
     expose:
       - "8000"
     working_dir: /app
@@ -31,7 +29,6 @@ services:
   # === MySQL Database ===
   mysql:
     image: mysql:8.0
-    container_name: cart-promo-db
     restart: always
     environment:
       MYSQL_DATABASE: cart_promo_service_db
