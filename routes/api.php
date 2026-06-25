@@ -16,7 +16,7 @@ Route::prefix('v1/auth')->middleware('jwt.auth')->group(function () {
 });
 
 // Protected cart & promo routes
-Route::prefix('v1')->middleware('jwt.auth')->group(function () {
+Route::prefix('v1')->middleware('apikey')->group(function () {
 
     Route::get('/products', [CartController::class, 'products']);
 
