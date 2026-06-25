@@ -17,7 +17,12 @@
                     "200": {
                         "description": "Products retrieved successfully"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ]
             }
         },
         "/api/v1/carts": {
@@ -66,7 +71,12 @@
                     "200": {
                         "description": "Cart created successfully"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ]
             }
         },
         "/api/v1/carts/{id}": {
@@ -93,7 +103,12 @@
                     "404": {
                         "description": "Cart not found"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ]
             },
             "delete": {
                 "tags": [
@@ -118,7 +133,12 @@
                     "404": {
                         "description": "Cart not found"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ]
             }
         },
         "/api/v1/promo": {
@@ -132,7 +152,12 @@
                     "200": {
                         "description": "Promos retrieved successfully"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ]
             }
         },
         "/api/v1/promo/{id}": {
@@ -159,7 +184,12 @@
                     "404": {
                         "description": "Promo not found"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ]
             }
         },
         "/api/v1/promo/apply": {
@@ -205,7 +235,22 @@
                     "404": {
                         "description": "Promo not found"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "ApiKeyAuth": {
+                "type": "apiKey",
+                "description": "Masukkan NIM Anda (102022400283) sebagai API Key",
+                "name": "X-IAE-KEY",
+                "in": "header"
             }
         }
     },

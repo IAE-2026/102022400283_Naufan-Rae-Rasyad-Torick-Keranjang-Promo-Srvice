@@ -15,6 +15,7 @@ class CartController extends Controller
         operationId: 'getProducts',
         tags: ['Products'],
         summary: 'Get list products',
+        security: [['ApiKeyAuth' => []]],
         responses: [
             new OA\Response(response: 200, description: 'Products retrieved successfully'),
         ]
@@ -33,6 +34,7 @@ class CartController extends Controller
         operationId: 'createCart',
         tags: ['Carts'],
         summary: 'Create cart item',
+        security: [['ApiKeyAuth' => []]],
         requestBody: new OA\RequestBody(
             required: true,
             content: new OA\JsonContent(
@@ -78,6 +80,7 @@ class CartController extends Controller
         operationId: 'getCartDetail',
         tags: ['Carts'],
         summary: 'Get cart detail',
+        security: [['ApiKeyAuth' => []]],
         parameters: [
             new OA\Parameter(name: 'id', in: 'path', required: true, schema: new OA\Schema(type: 'integer')),
         ],
@@ -110,6 +113,7 @@ class CartController extends Controller
         operationId: 'deleteCart',
         tags: ['Carts'],
         summary: 'Delete cart item',
+        security: [['ApiKeyAuth' => []]],
         parameters: [
             new OA\Parameter(name: 'id', in: 'path', required: true, schema: new OA\Schema(type: 'integer')),
         ],

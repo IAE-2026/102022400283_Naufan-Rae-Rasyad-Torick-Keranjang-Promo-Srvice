@@ -15,6 +15,13 @@ use OpenApi\Attributes as OA;
     version: '1.0.0',
     description: 'API Documentation for Cart Promo Service'
 )]
+#[OA\SecurityScheme(
+    securityScheme: 'ApiKeyAuth',
+    type: 'apiKey',
+    in: 'header',
+    name: 'X-IAE-KEY',
+    description: 'Masukkan NIM Anda (102022400283) sebagai API Key'
+)]
 class PromoController extends Controller
 {
     #[OA\Get(
@@ -22,6 +29,7 @@ class PromoController extends Controller
         operationId: 'getPromos',
         tags: ['Promo'],
         summary: 'Get list promos',
+        security: [['ApiKeyAuth' => []]],
         responses: [
             new OA\Response(response: 200, description: 'Promos retrieved successfully'),
         ]
@@ -40,6 +48,7 @@ class PromoController extends Controller
         operationId: 'getPromoDetail',
         tags: ['Promo'],
         summary: 'Get promo detail',
+        security: [['ApiKeyAuth' => []]],
         parameters: [
             new OA\Parameter(name: 'id', in: 'path', required: true, schema: new OA\Schema(type: 'integer')),
         ],
@@ -73,6 +82,7 @@ class PromoController extends Controller
         tags: ['Promo'],
         summary: 'Apply promo code',
         description: 'Applies a promo code to a cart total',
+        security: [['ApiKeyAuth' => []]],
         requestBody: new OA\RequestBody(
             required: true,
             content: new OA\JsonContent(
