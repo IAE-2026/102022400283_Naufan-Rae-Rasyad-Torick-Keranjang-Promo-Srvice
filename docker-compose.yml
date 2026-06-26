@@ -1,23 +1,23 @@
 services:
   # === API Gateway (Nginx) ===
-  # Semua traffic masuk melalui gateway ini (port 80)
-  # Service internal TIDAK bisa diakses langsung dari luar
+  # Semua traffic masuk melalui gateway ini
   nginx:
     image: nginx:alpine
     restart: always
     ports:
-      - "80:80"
+      - "${GATEWAY_PORT:-8080}:80"
     volumes:
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
     depends_on:
       - app
 
   # === Laravel App ===
-  # Hanya bisa diakses via nginx (tidak ada port mapping ke host)
   app:
     build: .
     expose:
       - "8000"
+    ports:
+      - "${APP_PORT:-8000}:8000"
     working_dir: /app
     volumes:
       - .:/app
