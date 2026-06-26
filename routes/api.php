@@ -26,7 +26,10 @@ Route::prefix('v1')->middleware('apikey')->group(function () {
     Route::post('/', [CartController::class, 'store']);
     Route::get('/{id}', [CartController::class, 'show']);
     Route::delete('/{id}', [CartController::class, 'destroy']);
-   
+    
+    // Explicit double-slash endpoints to handle double-slashes when resource name is empty
+    Route::get('//{id}', [CartController::class, 'show']);
+    Route::delete('//{id}', [CartController::class, 'destroy']);
 });
 
 // Auth routes (public)
